@@ -538,6 +538,52 @@ body.dark-mode .translation {
   font-size: 0.9em;
   opacity: 0.8;
 }
+#shortcutsPanel {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 8px 15px;
+  border-radius: 8px;
+  z-index: 9999;
+  user-select: none;
+  font-family: inherit;
+  opacity: 0.9;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.shortcut-item {
+  display: flex;
+  align-items: center;
+}
+.shortcut-label {
+  color: #4fdad4;
+}
+.shortcut-inst {
+  color: #fff;
+  margin-left: 4px;
+}
+kbd {
+  background: #444;
+  border: 1px solid #555;
+  border-radius: 4px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
+  padding: 1px 4px;
+  font-family: inherit;
+  font-size: 0.9em;
+  color: #fff;
+  display: inline-block;
+  line-height: 1;
+  margin: 0 2px;
+  vertical-align: middle;
+}
+.shortcut-separator {
+  color: rgba(255, 255, 255, 0.2);
+}
 .panel-btn {
   cursor: pointer;
   background-color: transparent;
@@ -560,7 +606,7 @@ body.dark-mode .translation {
 #contextHintBox {
   display: none;
   position: fixed;
-  top: 10px;
+  top: 60px;
   right: 10px;
   background: rgba(13, 110, 253, 0.85);
   color: #fff;

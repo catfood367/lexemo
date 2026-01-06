@@ -78,5 +78,8 @@
     "RESET_FSRS_CONFIRMATION": "Are you sure you want to reset all FSRS statistics for the deck \"{0}\"?\n\nThis action cannot be undone.",
     "NONE": "None",
     "SPEECH_API_NOT_SUPPORTED": "Speech Recognition API not supported",
-    "MIC_PERMISSION_DENIED": "Microphone permission denied. Pronunciation mode has been disabled."
+    "MIC_PERMISSION_DENIED": "Microphone permission denied. Pronunciation mode has been disabled.",
+    "DELETE_CARD": "Delete Card",
+    "LEVEL_RANGE": "Level Range",
+    "LEVEL_RANGE_INSTRUCTION": "Hold <kbd>↑</kbd> & type level range (e.g. 5 or 1-5)"
 }

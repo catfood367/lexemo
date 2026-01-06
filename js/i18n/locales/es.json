@@ -78,5 +78,8 @@
     "RESET_FSRS_CONFIRMATION": "¿Estás seguro de que quieres restablecer todas las estadísticas FSRS del mazo \"{0}\"?\n\nEsta acción no se puede deshacer.",
     "NONE": "Ninguna",
     "SPEECH_API_NOT_SUPPORTED": "API de Reconocimiento de Voz no soportada",
-    "MIC_PERMISSION_DENIED": "Permiso de micrófono denegado. El modo de pronunciación ha sido desactivado."
+    "MIC_PERMISSION_DENIED": "Permiso de micrófono denegado. El modo de pronunciación ha sido desactivado.",
+    "DELETE_CARD": "Eliminar Tarjeta",
+    "LEVEL_RANGE": "Rango de Niveles",
+    "LEVEL_RANGE_INSTRUCTION": "Mantén <kbd>↑</kbd> y escribe rango (ej. 5 o 1-5)"
 }

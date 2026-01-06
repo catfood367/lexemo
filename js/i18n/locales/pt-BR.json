@@ -78,5 +78,8 @@
     "RESET_FSRS_CONFIRMATION": "Tem certeza que quer resetar todas as estatísticas FSRS do deck \"{0}\"?\n\nEsta ação não pode ser desfeita.",
     "NONE": "Nenhuma",
     "SPEECH_API_NOT_SUPPORTED": "Speech Recognition API não suportada",
-    "MIC_PERMISSION_DENIED": "Permissão do microfone negada. O modo de pronúncia foi desativado."
+    "MIC_PERMISSION_DENIED": "Permissão do microfone negada. O modo de pronúncia foi desativado.",
+    "DELETE_CARD": "Deletar Card",
+    "LEVEL_RANGE": "Intervalo de Níveis",
+    "LEVEL_RANGE_INSTRUCTION": "Segure <kbd>↑</kbd> e digite o intervalo (ex: 5 ou 1-5)"
 }
