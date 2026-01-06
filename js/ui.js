@@ -169,7 +169,7 @@ function _getFsrsScoreText(stats) {
   const scoreLabel = getTranslation("SCORE");
   const reviewLabel = getTranslation("REVIEW");
   const newLabel = getTranslation("NEW");
-  return `| ${scoreLabel}: ${state.score} | ${reviewLabel}: ${stats.dueCount + state.sessionReviewQueue.length} | ${newLabel}: ${stats.newCount}`;
+  return `${scoreLabel}: ${state.score} | ${reviewLabel}: ${stats.dueCount + state.sessionReviewQueue.length} | ${newLabel}: ${stats.newCount}`;
 }
 
 function _getFreeModeScoreText() {
@@ -186,9 +186,9 @@ function _getFreeModeScoreText() {
     maxOriginalLevel === 0;
 
   if (isFullScope) {
-    return `| ${scoreLabel}: ${state.score} | ${levelLabel}: ${currentLevelInScope} / ${totalLevelsInScope}`;
+    return `${scoreLabel}: ${state.score} | ${levelLabel}: ${currentLevelInScope} / ${totalLevelsInScope}`;
   } else {
-    return `| ${scoreLabel}: ${state.score} | ${levelLabel}: ${state.levelScopeStart} / ${state.levelScopeEnd}`;
+    return `${scoreLabel}: ${state.score} | ${levelLabel}: ${state.levelScopeStart} / ${state.levelScopeEnd}`;
   }
 }
 
