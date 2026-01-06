@@ -17,7 +17,7 @@
       <div class="modal-content">
         <h1 class="modal-title secondary" data-i18n="WARNING"></h1>
         <p id="customAlertMessage" data-i18n="THIS_IS_A_WARNING_MESSAGE"></p>
-        <div class="modal-actions">
+        <div class="modal-actions justify-end">
           <button
             id="customAlertCloseBtn"
             class="btn btn-primary"
@@ -29,19 +29,21 @@
 
     <div id="customConfirmModal" class="modal">
       <div class="modal-content">
-        <h1 class="modal-title warning" data-i18n="CONFIRMATION"></h1>
+        <h1 class="modal-title secondary" data-i18n="CONFIRMATION"></h1>
         <p id="customConfirmMessage" data-i18n="ARE_YOU_SURE"></p>
-        <div class="modal-actions">
-          <button
-            id="customConfirmCancelBtn"
-            class="btn btn-danger"
-            data-i18n="CANCEL"
-          ></button>
-          <button
-            id="customConfirmOkBtn"
-            class="btn btn-primary"
-            data-i18n="OK"
-          ></button>
+        <div class="modal-actions justify-end">
+          <div class="modal-actions-sub">
+            <button
+              id="customConfirmCancelBtn"
+              class="btn btn-secondary"
+              data-i18n="CANCEL"
+            ></button>
+            <button
+              id="customConfirmOkBtn"
+              class="btn btn-primary"
+              data-i18n="OK"
+            ></button>
+          </div>
         </div>
       </div>
     </div>
@@ -70,17 +72,19 @@
         ></label>
         <input type="text" id="editCardHintInput" class="modal-input mb-20" />
 
-        <div class="modal-actions justify-between">
-          <button
-            id="editCardCancelBtn"
-            class="btn btn-danger"
-            data-i18n="CANCEL"
-          ></button>
-          <button
-            id="editCardSaveBtn"
-            class="btn btn-primary"
-            data-i18n="SAVE"
-          ></button>
+        <div class="modal-actions justify-end">
+          <div class="modal-actions-sub">
+            <button
+              id="editCardCancelBtn"
+              class="btn btn-danger"
+              data-i18n="CANCEL"
+            ></button>
+            <button
+              id="editCardSaveBtn"
+              class="btn btn-primary"
+              data-i18n="SAVE"
+            ></button>
+          </div>
         </div>
       </div>
     </div>
@@ -124,17 +128,19 @@
             <span data-i18n="MATURE"></span> <span id="statsMature">0</span>
           </li>
         </ul>
-        <div class="modal-actions">
-          <button
-            id="statsResetFsrsBtn"
-            class="btn btn-danger"
-            data-i18n="RESET_FSRS"
-          ></button>
-          <button
-            id="statsCloseBtn"
-            class="btn btn-primary"
-            data-i18n="CLOSE"
-          ></button>
+        <div class="modal-actions justify-end">
+          <div class="modal-actions-sub">
+            <button
+              id="statsResetFsrsBtn"
+              class="btn btn-danger"
+              data-i18n="RESET_FSRS"
+            ></button>
+            <button
+              id="statsCloseBtn"
+              class="btn btn-primary"
+              data-i18n="CLOSE"
+            ></button>
+          </div>
         </div>
       </div>
     </div>
@@ -156,7 +162,7 @@
           <input type="checkbox" id="generalDarkModeToggle" />
         </label>
 
-        <label for="languageSelector">
+        <label for="languageSelector" style="margin-top: 30px;">
           <span data-i18n="LANGUAGE_SELECTOR_LABEL"></span>:
         </label>
         <select id="languageSelector">
@@ -165,23 +171,26 @@
           <option value="pt-BR">Português</option>
         </select>
 
-        <div class="modal-actions justify-between mt-25">
-          <button
-            id="generalSettingsCancelBtn"
-            class="btn btn-danger"
-            data-i18n="CANCEL"
-          ></button>
-          <button
-            id="generalSettingsSaveBtn"
-            class="btn btn-primary"
-            data-i18n="SAVE"
-          ></button>
+        <div class="modal-actions justify-end mt-25">
+          <div class="modal-actions-sub">
+            <button
+              id="generalSettingsCancelBtn"
+              class="btn btn-danger"
+              data-i18n="CANCEL"
+            ></button>
+            <button
+              id="generalSettingsSaveBtn"
+              class="btn btn-primary"
+              data-i18n="SAVE"
+            ></button>
+          </div>
         </div>
       </div>
     </div>
 
     <div id="settingsModal" class="modal">
       <div class="modal-content">
+        <h1 data-i18n="DECK_SETTINGS"></h1>
         <label for="deckNameInput"><span data-i18n="DECK_NAME"></span>:</label>
         <input
           type="text"
@@ -201,7 +210,7 @@
           </label>
           <button
             id="editJsonBtn"
-            class="btn btn-secondary full-width"
+            class="btn"
             data-i18n="EDIT_IMPORT_JSON"
           ></button>
         </div>
@@ -291,18 +300,20 @@
 
         <div
           id="settingsModalActions"
-          class="modal-actions justify-between mt-25"
+          class="modal-actions justify-end"
         >
-          <button
-            id="settingsCancelBtn"
-            class="btn btn-danger"
-            data-i18n="CANCEL"
-          ></button>
-          <button
-            id="settingsSaveBtn"
-            class="btn btn-primary"
-            data-i18n="SAVE"
-          ></button>
+          <div class="modal-actions-sub">
+            <button
+              id="settingsCancelBtn"
+              class="btn btn-danger"
+              data-i18n="CANCEL"
+            ></button>
+            <button
+              id="settingsSaveBtn"
+              class="btn btn-primary"
+              data-i18n="SAVE"
+            ></button>
+          </div>
         </div>
       </div>
     </div>
@@ -311,7 +322,7 @@
       <div class="modal-content">
         <h1 data-i18n="EDIT_JSON_CONTENT"></h1>
         <textarea id="jsonEditorTextarea"></textarea>
-        <div class="modal-actions">
+        <div class="modal-actions justify-between">
           <div class="modal-actions-sub">
             <button
               id="importJsonBtn"
@@ -344,13 +355,13 @@
       <div class="modal-content">
         <h2 data-i18n="IMPORT_JSON"></h2>
         <p data-i18n="MERGE_PROMPT"></p>
-        <div class="modal-actions mt-20">
-          <button
-            id="cancelMergeBtn"
-            class="btn btn-danger"
-            data-i18n="CANCEL"
-          ></button>
+        <div class="modal-actions justify-end mt-20">
           <div class="modal-actions-sub">
+            <button
+              id="cancelMergeBtn"
+              class="btn btn-danger"
+              data-i18n="CANCEL"
+            ></button>
             <button
               id="overwriteBtn"
               class="btn btn-warning"
