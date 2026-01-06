@@ -40,7 +40,7 @@ export function generateColor(str) {
   const hash = hashCode(str);
   const hue = (hash * 137) % 360;
   const saturation = 85 + (hash % 15);
-  const lightness = state.darkModeEnabled ? 60 + (hash % 16) : 35 + (hash % 16);
+  const lightness = state.darkModeEnabled ? 60 + (hash % 16) : 25 + (hash % 10);
   return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
 }
 
