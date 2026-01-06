@@ -483,6 +483,29 @@ function _handleMergeClick() {
   }
 }
 
+function _handleExportJsonClick() {
+  const content = dom.jsonEditorTextarea.value;
+  if (!content.trim()) return;
+
+  try {
+    JSON.parse(content); // Validate JSON before export
+  } catch (e) {
+    showCustomAlert(getTranslation("INVALID_JSON_FORMAT_ERROR") + e.message);
+    return;
+  }
+
+  const blob = new Blob([content], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  const deckName = dom.deckNameInput.value.trim() || "deck";
+  a.href = url;
+  a.download = `${deckName}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
 function _handleCancelJsonClick() {
   state.pendingDeckContent = state.jsonEditorOriginalContent;
   dom.jsonEditorTextarea.classList.remove("invalid");
@@ -498,6 +521,7 @@ function _handleSaveJsonClick() {
 export function initJsonEditor() {
   dom.editJsonBtn.addEventListener("click", _handleEditJsonClick);
   dom.importJsonBtn.addEventListener("click", () => dom.fileInput.click());
+  dom.exportJsonBtn.addEventListener("click", _handleExportJsonClick);
   dom.fileInput.addEventListener("change", _handleFileInputChange);
   dom.cancelMergeBtn.addEventListener("click", () => _resetImportCache());
   dom.overwriteBtn.addEventListener("click", _handleOverwriteClick);

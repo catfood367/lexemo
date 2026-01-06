@@ -33,6 +33,7 @@ export const dom = {
   restartBtn: document.getElementById("restartBtn"),
   jsonEditorTextarea: document.getElementById("jsonEditorTextarea"),
   importJsonBtn: document.getElementById("importJsonBtn"),
+  exportJsonBtn: document.getElementById("exportJsonBtn"),
   cancelJsonBtn: document.getElementById("cancelJsonBtn"),
   saveJsonBtn: document.getElementById("saveJsonBtn"),
   cancelMergeBtn: document.getElementById("cancelMergeBtn"),

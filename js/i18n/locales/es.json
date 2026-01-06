@@ -43,7 +43,7 @@
     "RANDOM_ORDER": "Orden Aleatorio",
     "RESTART_ON_WRONG": "Reiniciar al Fallar",
     "EDIT_JSON_CONTENT": "Editar Contenido JSON",
-    "IMPORT_FILE": "Importar Archivo...",
+    "IMPORT_FILE": "Importar Archivo",
     "IMPORT_JSON": "Importar JSON",
     "MERGE_PROMPT": "El editor ya contiene datos. ¿Quieres fusionar el nuevo archivo o sobrescribirlo?",
     "OVERWRITE": "Sobrescribir",
@@ -81,5 +81,6 @@
     "MIC_PERMISSION_DENIED": "Permiso de micrófono denegado. El modo de pronunciación ha sido desactivado.",
     "DELETE_CARD": "Eliminar Tarjeta",
     "LEVEL_RANGE": "Rango de Niveles",
-    "LEVEL_RANGE_INSTRUCTION": "Mantén <kbd>↑</kbd> y escribe rango (ej. 5 o 1-5)"
+    "LEVEL_RANGE_INSTRUCTION": "Mantén <kbd>↑</kbd> y escribe rango (ej. 5 o 1-5)",
+    "EXPORT_FILE": "Exportar Archivo"
 }
