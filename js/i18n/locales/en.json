@@ -12,7 +12,7 @@
     "SAVE": "Save",
     "SELECT_A_DECK": "Select a Deck",
     "CONGRATULATIONS": "🎉 Congratulations! 🎉",
-    "YOU_FINISHED_THE_GAME": "You finished the game!!!",
+    "YOU_FINISHED_THE_GAME": "You have finished all cards in this deck!",
     "RESTART": "Restart",
     "STATISTICS": "Statistics",
     "TOTAL_CARDS": "Total Cards",
@@ -81,6 +81,6 @@
     "MIC_PERMISSION_DENIED": "Microphone permission denied. Pronunciation mode has been disabled.",
     "DELETE_CARD": "Delete Card",
     "LEVEL_RANGE": "Level Range",
-    "LEVEL_RANGE_INSTRUCTION": "Hold <kbd>↑</kbd> & type level range (e.g. 5 or 1-5)",
+    "LEVEL_RANGE_INSTRUCTION": "Hold <kbd>↑</kbd> & type level range (e.g. 5 or 5-10)",
     "EXPORT_FILE": "Export File"
 }

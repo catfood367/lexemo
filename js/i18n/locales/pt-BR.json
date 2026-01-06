@@ -12,7 +12,7 @@
     "SAVE": "Salvar",
     "SELECT_A_DECK": "Selecione um Deck",
     "CONGRATULATIONS": "🎉 Parabéns! 🎉",
-    "YOU_FINISHED_THE_GAME": "Você terminou o jogo!!!",
+    "YOU_FINISHED_THE_GAME": "Você finalizou todas as cartas deste baralho!",
     "RESTART": "Reiniciar",
     "STATISTICS": "Estatísticas",
     "TOTAL_CARDS": "Total de Cartões",
@@ -81,6 +81,6 @@
     "MIC_PERMISSION_DENIED": "Permissão do microfone negada. O modo de pronúncia foi desativado.",
     "DELETE_CARD": "Deletar Card",
     "LEVEL_RANGE": "Intervalo de Níveis",
-    "LEVEL_RANGE_INSTRUCTION": "Segure <kbd>↑</kbd> e digite o intervalo (ex: 5 ou 1-5)",
+    "LEVEL_RANGE_INSTRUCTION": "Segure <kbd>↑</kbd> e digite o intervalo (ex: 5 ou 5-10)",
     "EXPORT_FILE": "Exportar Arquivo"
 }

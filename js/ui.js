@@ -228,13 +228,12 @@ function _handleCongratsClose(isFsrs, startGameCallback) {
 
 export function showCongrats(isFsrs = false, startGameCallback) {
   if (isFsrs) {
-    dom.congratsMessage.textContent =
-      "Não há cartões novos ou para revisar no momento! Retornando ao Modo Livre.";
+    dom.congratsMessage.textContent = getTranslation("FSRS_NO_CARDS");
     state.evaluativeModeEnabled = false;
     state.pronunciationModeEnabled = false;
     updateShortcutsVisibility();
   } else {
-    dom.congratsMessage.textContent = "Você terminou o jogo!!!";
+    dom.congratsMessage.textContent = getTranslation("YOU_FINISHED_THE_GAME");
   }
 
   dom.congratsModal.style.display = "flex";

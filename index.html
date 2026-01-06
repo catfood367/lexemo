@@ -32,18 +32,16 @@
         <h1 class="modal-title secondary" data-i18n="CONFIRMATION"></h1>
         <p id="customConfirmMessage" data-i18n="ARE_YOU_SURE"></p>
         <div class="modal-actions justify-end">
-          <div class="modal-actions-sub">
-            <button
-              id="customConfirmCancelBtn"
-              class="btn btn-outline-danger"
-              data-i18n="CANCEL"
-            ></button>
-            <button
-              id="customConfirmOkBtn"
-              class="btn btn-primary"
-              data-i18n="OK"
-            ></button>
-          </div>
+          <button
+            id="customConfirmCancelBtn"
+            class="btn btn-outline-danger"
+            data-i18n="CANCEL"
+          ></button>
+          <button
+            id="customConfirmOkBtn"
+            class="btn btn-primary"
+            data-i18n="OK"
+          ></button>
         </div>
       </div>
     </div>
@@ -73,18 +71,16 @@
         <input type="text" id="editCardHintInput" class="modal-input mb-20" />
 
         <div class="modal-actions justify-end">
-          <div class="modal-actions-sub">
-            <button
-              id="editCardCancelBtn"
-              class="btn btn-outline-danger"
-              data-i18n="CANCEL"
-            ></button>
-            <button
-              id="editCardSaveBtn"
-              class="btn btn-primary"
-              data-i18n="SAVE"
-            ></button>
-          </div>
+          <button
+            id="editCardCancelBtn"
+            class="btn btn-outline-danger"
+            data-i18n="CANCEL"
+          ></button>
+          <button
+            id="editCardSaveBtn"
+            class="btn btn-primary"
+            data-i18n="SAVE"
+          ></button>
         </div>
       </div>
     </div>
@@ -104,11 +100,13 @@
       <div class="modal-content">
         <h1 data-i18n="CONGRATULATIONS"></h1>
         <p id="congratsMessage" data-i18n="YOU_FINISHED_THE_GAME"></p>
-        <button
-          id="restartBtn"
-          class="btn btn-primary"
-          data-i18n="RESTART"
-        ></button>
+        <div class="modal-actions justify-center">
+          <button
+            id="restartBtn"
+            class="btn btn-primary"
+            data-i18n="RESTART"
+          ></button>
+        </div>
       </div>
     </div>
 
@@ -129,18 +127,16 @@
           </li>
         </ul>
         <div class="modal-actions justify-end">
-          <div class="modal-actions-sub">
-            <button
-              id="statsResetFsrsBtn"
-              class="btn btn-danger"
-              data-i18n="RESET_FSRS"
-            ></button>
-            <button
-              id="statsCloseBtn"
-              class="btn btn-primary"
-              data-i18n="CLOSE"
-            ></button>
-          </div>
+          <button
+            id="statsResetFsrsBtn"
+            class="btn btn-danger"
+            data-i18n="RESET_FSRS"
+          ></button>
+          <button
+            id="statsCloseBtn"
+            class="btn btn-primary"
+            data-i18n="CLOSE"
+          ></button>
         </div>
       </div>
     </div>
@@ -172,18 +168,16 @@
         </select>
 
         <div class="modal-actions justify-end mt-25">
-          <div class="modal-actions-sub">
-            <button
-              id="generalSettingsCancelBtn"
-              class="btn btn-outline-danger"
-              data-i18n="CANCEL"
-            ></button>
-            <button
-              id="generalSettingsSaveBtn"
-              class="btn btn-primary"
-              data-i18n="SAVE"
-            ></button>
-          </div>
+          <button
+            id="generalSettingsCancelBtn"
+            class="btn btn-outline-danger"
+            data-i18n="CANCEL"
+          ></button>
+          <button
+            id="generalSettingsSaveBtn"
+            class="btn btn-primary"
+            data-i18n="SAVE"
+          ></button>
         </div>
       </div>
     </div>
@@ -302,18 +296,16 @@
           id="settingsModalActions"
           class="modal-actions justify-end"
         >
-          <div class="modal-actions-sub">
-            <button
-              id="settingsCancelBtn"
-              class="btn btn-outline-danger"
-              data-i18n="CANCEL"
-            ></button>
-            <button
-              id="settingsSaveBtn"
-              class="btn btn-primary"
-              data-i18n="SAVE"
-            ></button>
-          </div>
+          <button
+            id="settingsCancelBtn"
+            class="btn btn-outline-danger"
+            data-i18n="CANCEL"
+          ></button>
+          <button
+            id="settingsSaveBtn"
+            class="btn btn-primary"
+            data-i18n="SAVE"
+          ></button>
         </div>
       </div>
     </div>
@@ -355,13 +347,13 @@
       <div class="modal-content">
         <h2 data-i18n="IMPORT_JSON"></h2>
         <p data-i18n="MERGE_PROMPT"></p>
-        <div class="modal-actions justify-end mt-20">
+        <div class="modal-actions justify-between mt-20">
+          <button
+            id="cancelMergeBtn"
+            class="btn btn-outline-danger"
+            data-i18n="CANCEL"
+          ></button>
           <div class="modal-actions-sub">
-            <button
-              id="cancelMergeBtn"
-              class="btn btn-outline-danger"
-              data-i18n="CANCEL"
-            ></button>
             <button
               id="overwriteBtn"
               class="btn btn-warning"

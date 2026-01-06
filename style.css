@@ -516,6 +516,10 @@ body.dark-mode .modal-content select {
   font-size: 1.1rem;
 }
 
+#congratsModal .modal-content {
+  text-align: center;
+}
+
 #statsModal .modal-content {
   width: 550px;
   text-align: left;
@@ -693,7 +697,7 @@ body.dark-mode .modal-content select {
   font-size: 30px;
   font-weight: bold;
   margin-top: 5px;
-  opacity: 0.8;
+  opacity: 1;
   color: var(--text-main);
   font-family: sans-serif;
 }
