@@ -75,6 +75,8 @@ export const dom = {
   settingsCancelBtn: document.getElementById("settingsCancelBtn"),
   settingsSaveBtn: document.getElementById("settingsSaveBtn"),
   languageSelector: document.getElementById("languageSelector"),
+  levelRangeShortcut: document.getElementById("levelRangeShortcut"),
+  levelRangeSeparator: document.getElementById("levelRangeSeparator"),
 };
 
 export function showCustomAlert(message) {
@@ -199,6 +201,14 @@ export function updateScoreDisplay() {
   } else {
     dom.scoreText.textContent = _getFreeModeScoreText();
   }
+  updateShortcutsVisibility();
+}
+
+export function updateShortcutsVisibility() {
+  const isFsrs = state.evaluativeModeEnabled;
+  const display = isFsrs ? "none" : "flex";
+  if (dom.levelRangeShortcut) dom.levelRangeShortcut.style.display = display;
+  if (dom.levelRangeSeparator) dom.levelRangeSeparator.style.display = display;
 }
 
 function _handleCongratsClose(isFsrs, startGameCallback) {
@@ -221,6 +231,7 @@ export function showCongrats(isFsrs = false, startGameCallback) {
       "Não há cartões novos ou para revisar no momento! Retornando ao Modo Livre.";
     state.evaluativeModeEnabled = false;
     state.pronunciationModeEnabled = false;
+    updateShortcutsVisibility();
   } else {
     dom.congratsMessage.textContent = "Você terminou o jogo!!!";
   }
