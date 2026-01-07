@@ -118,7 +118,7 @@ export async function loadGlobalSettings() {
     : {
         correctSoundEnabled: true,
         wrongSoundEnabled: true,
-        darkModeEnabled: false,
+        darkModeEnabled: true,
         language: "pt-BR",
       };
 

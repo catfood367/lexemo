@@ -32,7 +32,7 @@ export const state = {
 
   correctSoundEnabled: true,
   wrongSoundEnabled: true,
-  darkModeEnabled: false,
+  darkModeEnabled: true,
 
   randomToggleEnabled: false,
   colorHintEnabled: true,
