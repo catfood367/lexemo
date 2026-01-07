@@ -9,6 +9,7 @@ export async function setLanguage(lang) {
     translations = await response.json();
     translatePage();
     localStorage.setItem("language", lang);
+    document.documentElement.lang = lang;
   } catch (error) {
     console.error(error);
     if (lang !== "en") {
@@ -47,6 +48,13 @@ export function getTranslation(key) {
   return translations[key] || key;
 }
 
+export function detectBrowserLanguage() {
+  const lang = navigator.language || navigator.userLanguage;
+  if (lang.startsWith("pt")) return "pt-BR";
+  if (lang.startsWith("es")) return "es";
+  return "en";
+}
+
 export function getLanguage() {
-  return localStorage.getItem("language") || "pt-BR";
+  return localStorage.getItem("language") || detectBrowserLanguage();
 }

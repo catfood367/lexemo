@@ -1,6 +1,6 @@
 import { state, GROUP_SIZE, GLOBAL_SETTINGS_KEY } from "./state.js";
 import * as fsrs from "./fsrs.js";
-import { setLanguage, getTranslation } from "./i18n/i18n.js";
+import { setLanguage, getTranslation, detectBrowserLanguage } from "./i18n/i18n.js";
 
 export const dom = {
   scoreText: document.getElementById("scoreText"),
@@ -119,16 +119,16 @@ export async function loadGlobalSettings() {
         correctSoundEnabled: true,
         wrongSoundEnabled: true,
         darkModeEnabled: true,
-        language: "pt-BR",
+        language: detectBrowserLanguage(),
       };
 
   dom.generalCorrectSoundToggle.checked = s.correctSoundEnabled;
   dom.generalWrongSoundToggle.checked = s.wrongSoundEnabled;
   dom.generalDarkModeToggle.checked = s.darkModeEnabled;
-  dom.languageSelector.value = s.language || "pt-BR";
+  dom.languageSelector.value = s.language || detectBrowserLanguage();
 
   _applyGlobalSettings(s);
-  await setLanguage(s.language || "pt-BR");
+  await setLanguage(s.language || detectBrowserLanguage());
 }
 
 function _createDeckCardElement(deck) {
