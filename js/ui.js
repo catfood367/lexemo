@@ -218,7 +218,7 @@ function _getFreeModeScoreText() {
   if (isFullScope) {
     return `${scoreLabel}: ${state.score} | ${levelLabel}: ${currentLevelInScope} / ${totalLevelsInScope}`;
   } else {
-    return `${scoreLabel}: ${state.score} | ${levelLabel}: ${state.levelScopeStart} / ${state.levelScopeEnd}`;
+    return `${scoreLabel}: ${state.score} | ${levelLabel}: ${currentLevelInScope} / ${state.levelScopeEnd}`;
   }
 }
 

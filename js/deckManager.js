@@ -66,7 +66,7 @@ export function applyDeckSettingsToGame(settings, onCompleteCallback) {
 
   if (state.timerModeEnabled && timerMode.isActive && oldSpeed !== newSpeed) {
       timerMode.stop();
-      timerMode.start();
+      timerMode.start(startGame);
   }
 
   if (!state.pronunciationModeEnabled) {

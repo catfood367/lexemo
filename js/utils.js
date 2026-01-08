@@ -36,12 +36,72 @@ export function hashCode(str) {
   return Math.abs(hash >>> 0);
 }
 
+const NEON_PALETTE = [
+  "hsl(0, 100%, 60%)",   // Red
+  "hsl(15, 100%, 60%)",  // Red-Orange
+  "hsl(30, 100%, 60%)",  // Orange
+  "hsl(45, 100%, 60%)",  // Gold
+  "hsl(60, 100%, 60%)",  // Yellow
+  "hsl(75, 100%, 60%)",  // Lime-Yellow
+  "hsl(90, 100%, 60%)",  // Lime
+  "hsl(105, 100%, 60%)", // Green-Lime
+  "hsl(120, 100%, 60%)", // Green
+  "hsl(135, 100%, 60%)", // Green-Cyan
+  "hsl(150, 100%, 60%)", // Spring Green
+  "hsl(165, 100%, 60%)", // Cyan-Green
+  "hsl(180, 100%, 60%)", // Cyan
+  "hsl(195, 100%, 60%)", // Sky Blue
+  "hsl(210, 100%, 60%)", // Dodger Blue
+  "hsl(225, 100%, 60%)", // Blue
+  "hsl(240, 100%, 60%)", // Blue-Indigo
+  "hsl(255, 100%, 60%)", // Indigo
+  "hsl(270, 100%, 60%)", // Purple
+  "hsl(285, 100%, 60%)", // Purple-Magenta
+  "hsl(300, 100%, 60%)", // Magenta
+  "hsl(315, 100%, 60%)", // Pink
+  "hsl(330, 100%, 60%)", // Deep Pink
+  "hsl(345, 100%, 60%)", // Red-Pink
+  "hsl(0, 100%, 75%)",   // Light Red
+  "hsl(60, 100%, 75%)",  // Light Yellow
+  "hsl(120, 100%, 75%)", // Light Green
+  "hsl(180, 100%, 75%)", // Light Cyan
+  "hsl(240, 100%, 75%)", // Light Blue
+  "hsl(300, 100%, 75%)"  // Light Magenta
+];
+
+const NEON_PALETTE_LIGHT = [
+  "hsl(0, 100%, 40%)",   // Dark Red
+  "hsl(15, 100%, 40%)",  // Dark Red-Orange
+  "hsl(30, 100%, 40%)",  // Dark Orange
+  "hsl(45, 100%, 35%)",  // Dark Gold
+  "hsl(60, 100%, 30%)",  // Dark Yellow (needs to be darker to be visible)
+  "hsl(75, 100%, 35%)",  // Dark Lime-Yellow
+  "hsl(90, 100%, 35%)",  // Dark Lime
+  "hsl(105, 100%, 35%)", // Dark Green-Lime
+  "hsl(120, 100%, 35%)", // Dark Green
+  "hsl(135, 100%, 35%)", // Dark Green-Cyan
+  "hsl(150, 100%, 35%)", // Dark Spring Green
+  "hsl(165, 100%, 35%)", // Dark Cyan-Green
+  "hsl(180, 100%, 35%)", // Dark Cyan
+  "hsl(195, 100%, 40%)", // Dark Sky Blue
+  "hsl(210, 100%, 40%)", // Dark Dodger Blue
+  "hsl(225, 100%, 40%)", // Dark Blue
+  "hsl(240, 100%, 40%)", // Dark Blue-Indigo
+  "hsl(255, 100%, 40%)", // Dark Indigo
+  "hsl(270, 100%, 40%)", // Dark Purple
+  "hsl(285, 100%, 40%)", // Dark Purple-Magenta
+  "hsl(300, 100%, 40%)", // Dark Magenta
+  "hsl(315, 100%, 40%)", // Dark Pink
+  "hsl(330, 100%, 40%)", // Dark Deep Pink
+  "hsl(345, 100%, 40%)"  // Dark Red-Pink
+];
+
 export function generateColor(str) {
   const hash = hashCode(str);
-  const hue = (hash * 137) % 360;
-  const saturation = 85 + (hash % 15);
-  const lightness = state.darkModeEnabled ? 60 + (hash % 16) : 25 + (hash % 10);
-  return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+  // Use the hash to pick a color from the curated palette
+  const palette = state.darkModeEnabled ? NEON_PALETTE : NEON_PALETTE_LIGHT;
+  const index = Math.abs(hash) % palette.length;
+  return palette[index];
 }
 
 function _getElementDimensions(str) {

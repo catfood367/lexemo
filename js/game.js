@@ -232,15 +232,23 @@ export function startGame() {
 
   if (state.timerModeEnabled) {
       // Reset to original order first
+      // Reset to original order first, respecting level scope
       if (state.originalSyllableList) {
-        state.syllableList = [...state.originalSyllableList];
+        if (state.levelScopeStart && state.levelScopeEnd) {
+            const startIndex = (state.levelScopeStart - 1) * GROUP_SIZE;
+            const endIndex = state.levelScopeEnd * GROUP_SIZE;
+            state.syllableList = state.originalSyllableList.slice(startIndex, endIndex);
+        } else {
+            state.syllableList = [...state.originalSyllableList];
+        }
       }
       // Shuffle if random is enabled
       if (state.randomToggleEnabled) {
         state.syllableList = utils.shuffle([...state.syllableList]);
       }
       
-      timerMode.start();
+      timerMode.stop(); // Ensure clean state
+      timerMode.start(startGame);
       return;
   } else {
       timerMode.stop();

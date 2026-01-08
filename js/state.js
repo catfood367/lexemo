@@ -5,6 +5,9 @@ export const LAST_OPENED_DECK_ID = "association_game_last_deck";
 
 export const correctSound = new Audio("assets/right.mp3");
 export const wrongSound = new Audio("assets/wrong.mp3");
+export const gunSound = new Audio("assets/gun.mp3");
+export const shotSound = new Audio("assets/shot.mp3");
+export const explosionSound = new Audio("assets/explosion.mp3");
 
 export const state = {
   allDecks: [],

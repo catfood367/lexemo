@@ -1,6 +1,6 @@
-import { state, correctSound, wrongSound } from "./state.js";
-import { dom, showCustomAlert, updateScoreDisplay } from "./ui.js";
-import { startGame } from "./game.js";
+import { state, correctSound, wrongSound, gunSound, shotSound, explosionSound } from "./state.js";
+import { dom, showCustomAlert, updateScoreDisplay, showCongrats } from "./ui.js";
+// import { startGame } from "./game.js"; // Removed to avoid circular dependency
 import { getTranslation } from "./i18n/i18n.js";
 import * as utils from "./utils.js";
 
@@ -214,11 +214,12 @@ class FlyingWord {
     const safeHeight = GAME_HEIGHT - safeTop - safeBottom;
     this.y = Math.random() * safeHeight + safeTop; 
     
-    this.speed = WORD_SPEED_BASE + Math.random(); // Slight speed variation
+    this.speed = WORD_SPEED_BASE; // Fixed base speed
     this.element = document.createElement("div");
     this.element.classList.add("flying-word");
     this.element.textContent = syllable.question;
-    this.element.style.color = utils.generateColor(syllable.question);
+    this.baseColor = utils.generateColor(syllable.question);
+    this.element.style.color = this.baseColor;
     this.element.style.position = "absolute";
     this.element.style.whiteSpace = "nowrap";
     this.element.style.whiteSpace = "nowrap";
@@ -234,7 +235,18 @@ class FlyingWord {
     this.updatePosition();
     
     if (this.x < 0 && !this.isDead && !this.isSolved) {
-        if (state.wrongSoundEnabled) wrongSound.play();
+        if (state.wrongSoundEnabled) {
+            explosionSound.currentTime = 0;
+            explosionSound.play().catch(() => {});
+            
+            wrongSound.volume = 0.4;
+            wrongSound.currentTime = 0;
+            setTimeout(() => {
+                wrongSound.play().then(() => {
+                    setTimeout(() => { wrongSound.volume = 1.0; }, 1000);
+                }).catch(() => {});
+            }, 300);
+        }
         this.explode(false); 
         // Delay game over to let explosion play
         setTimeout(() => {
@@ -247,8 +259,9 @@ class FlyingWord {
   }
 
   updatePosition() {
+    const bounce = Math.sin(Date.now() / 500 + this.id) * 5;
     this.element.style.left = `${this.x}px`;
-    this.element.style.top = `${this.y}px`;
+    this.element.style.top = `${this.y + bounce}px`;
   }
 
   destroy() {
@@ -260,7 +273,18 @@ class FlyingWord {
           timerMode.score++;
           state.score = timerMode.score;
           updateScoreDisplay();
-          if (state.correctSoundEnabled) correctSound.play();
+          if (state.correctSoundEnabled) {
+              explosionSound.currentTime = 0;
+              explosionSound.play().catch(() => {});
+
+              correctSound.volume = 0.4;
+              correctSound.currentTime = 0;
+              setTimeout(() => {
+                  correctSound.play().then(() => {
+                      setTimeout(() => { correctSound.volume = 1.0; }, 1000);
+                  }).catch(() => {});
+              }, 300);
+          }
       }
 
       // 8-bit explosion effect
@@ -307,6 +331,24 @@ class Projectile {
         // Hit
         this.destroy();
         this.targetWord.hitsReceived++;
+        
+        // Spawn one particle
+        const particle = new ExplosionParticle(this.x, this.y, this.targetWord.element.style.color);
+        timerMode.particles.push(particle);
+        
+        // Flash effect
+        const flashColor = state.darkModeEnabled ? "#ffffff" : "#000000";
+        this.targetWord.element.style.color = flashColor;
+        setTimeout(() => {
+            if (this.targetWord && this.targetWord.element.isConnected) {
+                 this.targetWord.element.style.color = this.targetWord.baseColor;
+            }
+        }, 60);
+
+        if (state.correctSoundEnabled) {
+            shotSound.currentTime = 0;
+            shotSound.play().catch(() => {});
+        }
         
         if (this.targetWord.isSolved && this.targetWord.hitsReceived >= this.targetWord.syllable.answer.length) {
             this.targetWord.explode(true);
@@ -363,8 +405,19 @@ export class TimerMode {
     this.loop();
   }
 
-  start() {
+  loadGroup(index) {
+      const start = index * 5; // GROUP_SIZE is 5
+      // Ensure we don't go out of bounds of the scoped list
+      if (start >= state.syllableList.length) {
+          return false; // No more groups
+      }
+      state.currentGroup = state.syllableList.slice(start, start + 5);
+      return state.currentGroup.length > 0;
+  }
+
+  start(restartCallback) {
     if (this.isActive) return;
+    if (restartCallback) this.restartCallback = restartCallback;
     this.isActive = true;
     this.userInput = "";
     this.score = 0;
@@ -374,7 +427,14 @@ export class TimerMode {
     this.projectiles = [];
     this.windParticles = [];
     this.trailParticles = [];
-    this.wordIndex = 0;
+    
+    // Initialize Group
+    state.currentGroupIndex = 0;
+    if (!this.loadGroup(state.currentGroupIndex)) {
+        // Should not happen if list is not empty, but handle it
+        this.gameOver();
+        return;
+    }
 
     // Setup UI
     this.container = document.getElementById("timer-mode-container");
@@ -385,7 +445,6 @@ export class TimerMode {
     // Create Plane
     const planeEl = document.createElement("div");
     planeEl.id = "plane";
-    // planeEl.textContent = "✈️"; // Removed for CSS triangle
     this.container.appendChild(planeEl);
     this.plane = new Plane(planeEl);
 
@@ -405,6 +464,9 @@ export class TimerMode {
 
   stop() {
     this.isActive = false;
+    this.score = 0;
+    state.score = 0;
+    updateScoreDisplay();
     cancelAnimationFrame(this.animationFrameId);
     if (this.container) {
         this.container.style.display = "none";
@@ -454,6 +516,11 @@ export class TimerMode {
       if (target) {
           const p = new Projectile(this.plane.x + 20, this.plane.y, target, char);
           this.projectiles.push(p);
+          if (state.correctSoundEnabled) {
+              gunSound.volume = 0.1;
+              gunSound.currentTime = 0;
+              gunSound.play().catch(() => {});
+          }
       }
   }
 
@@ -484,10 +551,28 @@ export class TimerMode {
       if (match) {
           // Correct!
           match.isSolved = true;
-          // match.explode(); // Delayed until projectile hit
-          // this.words = this.words.filter(w => w !== match); // Don't remove yet
           this.userInput = "";
           this.inputDisplay.textContent = "";
+          match.explode(true); // Plays sound and updates score
+          
+          // Remove from current group
+          const idx = state.currentGroup.findIndex(s => s.question === match.syllable.question);
+          if (idx > -1) {
+              state.currentGroup.splice(idx, 1);
+          }
+          
+          // Check if group is empty (Level Complete)
+          if (state.currentGroup.length === 0 && this.words.filter(w => !w.isSolved).length === 0) {
+              // Advance to next group
+              state.currentGroupIndex++;
+              if (!this.loadGroup(state.currentGroupIndex)) {
+                  // No more groups (fallback if scope logic fails or end of deck)
+                  this.stop();
+                  showCongrats(false, this.restartCallback); // Use the stored callback
+              } else {
+                  updateScoreDisplay(); // Update level indicator
+              }
+          }
       }
   }
 
@@ -586,14 +671,19 @@ export class TimerMode {
   };
 
   spawnWord() {
-    if (!state.syllableList || state.syllableList.length === 0) return;
+    if (!state.currentGroup || state.currentGroup.length === 0) return;
 
-    // Use sequential access (list is already shuffled if random is enabled)
-    const syllable = state.syllableList[this.wordIndex];
+    // Pick a random word from the current group
+    // But ensure it's not already on screen to avoid duplicates
+    const availableSyllables = state.currentGroup.filter(s => 
+        !this.words.some(w => w.syllable.question === s.question)
+    );
     
-    // Increment and wrap index
-    this.wordIndex = (this.wordIndex + 1) % state.syllableList.length;
+    if (availableSyllables.length === 0) return; // All words in group are currently flying
 
+    const randomIndex = Math.floor(Math.random() * availableSyllables.length);
+    const syllable = availableSyllables[randomIndex];
+    
     // Let's say speed 1 = base, speed 10 = 2.0x base.
     let val = Number(state.gameSpeed);
     if (isNaN(val) || val < 1) val = 1;
@@ -601,13 +691,7 @@ export class TimerMode {
     const safeGameSpeed = val;
     
     const speedMultiplier = 1 + (safeGameSpeed - 1) * 0.11;
-    let speed = (WORD_SPEED_BASE + Math.random()) * speedMultiplier;
-    
-    if (this.lastSpawnedWord && this.lastSpawnedWord.question === syllable.question) {
-         // If we are wrapping around or list is short, we might repeat.
-         // Just slow it down.
-         speed *= 0.5; 
-    }
+    let speed = WORD_SPEED_BASE * speedMultiplier;
 
     this.lastSpawnedWord = syllable;
     

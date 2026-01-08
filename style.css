@@ -691,6 +691,7 @@ body.dark-mode .modal-content select {
   top: 50%;
   transform: translate(-50%, -50%);
   font-family: sans-serif;
+  text-shadow: 0 0 8px currentColor;
 }
 
 .translation {
@@ -701,6 +702,7 @@ body.dark-mode .modal-content select {
   opacity: 1;
   color: var(--text-main);
   font-family: sans-serif;
+  text-shadow: 0 0 8px currentColor;
 }
 
 #scorePanel {
@@ -893,10 +895,21 @@ high {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: #1a1a2e; /* Dark blue background */
+  /* Light Mode Background: Creative Technical Grid Vibe */
+  background-color: #f0f4f8;
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.8) 0%, rgba(240, 244, 248, 0) 60%),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+  background-size: 100% 100%, 40px 40px, 40px 40px;
   z-index: 10; /* Above normal game */
   overflow: hidden;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body.dark-mode #timer-mode-container {
+  background: #1a1a2e; /* Dark blue background */
+  background-image: none;
 }
 
 #plane {
@@ -913,8 +926,12 @@ high {
 .flying-word {
   font-size: 24px;
   font-weight: bold;
-  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.2); /* Tighter shadow for light mode */
   padding: 5px 10px;
+}
+
+body.dark-mode .flying-word {
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
 }
 
 .projectile {
@@ -940,6 +957,11 @@ high {
   border-bottom: 2px solid rgba(233, 69, 96, 0.5);
   font-family: monospace;
   letter-spacing: 2px;
+}
+
+body:not(.dark-mode) #timer-mode-input {
+  color: #333;
+  border-bottom-color: rgba(233, 69, 96, 0.8);
 }
 
 .explosion-particle {
