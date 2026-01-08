@@ -13,6 +13,7 @@ import {
 import * as game from "./game.js";
 import * as speech from "./speech.js";
 import * as deckManager from "./deckManager.js";
+import { timerMode } from "./timerMode.js";
 import { getLanguage, getTranslation } from "./i18n/i18n.js";
 
 async function _setupApp() {
@@ -268,6 +269,7 @@ function _initDeckSettingsListeners() {
     );
     handleAnswerTipChange();
   });
+
   dom.answerTipIncrement.addEventListener("click", () => {
     dom.answerTipInput.value = Math.min(
       3,
@@ -276,10 +278,34 @@ function _initDeckSettingsListeners() {
     handleAnswerTipChange();
   });
 
+  function handleGameSpeedChange() {
+    let val = parseInt(dom.gameSpeedInput.value);
+    if (isNaN(val) || val < 1) val = 1;
+    if (val > 10) val = 10;
+    dom.gameSpeedInput.value = val;
+  }
+
+  dom.gameSpeedInput.addEventListener("change", handleGameSpeedChange);
+  dom.gameSpeedDecrement.addEventListener("click", () => {
+    dom.gameSpeedInput.value = Math.max(
+      1,
+      parseInt(dom.gameSpeedInput.value) - 1,
+    );
+    handleGameSpeedChange();
+  });
+  dom.gameSpeedIncrement.addEventListener("click", () => {
+    dom.gameSpeedInput.value = Math.min(
+      10,
+      parseInt(dom.gameSpeedInput.value) + 1,
+    );
+    handleGameSpeedChange();
+  });
+
   const modeToggles = [
     dom.modeFreeToggle,
     dom.modeFsrsToggle,
     dom.modePronunciationToggle,
+    dom.modeTimerToggle,
   ];
   modeToggles.forEach((toggle) =>
     toggle.addEventListener("click", (e) => {

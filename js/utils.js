@@ -60,8 +60,8 @@ function _getElementDimensions(str) {
 
 export function generatePosition(str) {
   const hash = hashCode(str);
-  const marginTop = 80;
-  const marginBottom = 150;
+  const marginTop = 120; // Increased to avoid score panel
+  const marginBottom = 180; // Increased to avoid input bar
   const marginLeft = 100;
   const marginRight = 100;
 

@@ -82,5 +82,7 @@
     "DELETE_CARD": "Delete Card",
     "LEVEL_RANGE": "Level Range",
     "LEVEL_RANGE_INSTRUCTION": "Hold <kbd>↑</kbd> & type level range (e.g. 5 or 5-10)",
-    "EXPORT_FILE": "Export File"
+    "EXPORT_FILE": "Export File",
+    "SPEED_MODE": "Speed Mode",
+    "GAME_SPEED": "Game Speed"
 }

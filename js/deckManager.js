@@ -16,6 +16,7 @@ import {
 import { startGame } from "./game.js";
 import { selectVoice, stopRecognition } from "./speech.js";
 import { getTranslation } from "./i18n/i18n.js";
+import { timerMode } from "./timerMode.js";
 
 export function loadDecks() {
   const decksJson = localStorage.getItem(DECK_STORAGE_KEY);
@@ -54,7 +55,19 @@ export function applyDeckSettingsToGame(settings, onCompleteCallback) {
   state.answerTipLetters = settings.answerTipLetters ?? 0;
   state.restartOnWrongEnabled = settings.restartOnWrongEnabled ?? false;
   state.evaluativeModeEnabled = settings.evaluativeModeEnabled ?? false;
+  state.evaluativeModeEnabled = settings.evaluativeModeEnabled ?? false;
   state.pronunciationModeEnabled = settings.pronunciationModeEnabled ?? false;
+  state.pronunciationModeEnabled = settings.pronunciationModeEnabled ?? false;
+  state.timerModeEnabled = settings.timerModeEnabled ?? false;
+  
+  const oldSpeed = state.gameSpeed;
+  const newSpeed = settings.gameSpeed || 1;
+  state.gameSpeed = newSpeed;
+
+  if (state.timerModeEnabled && timerMode.isActive && oldSpeed !== newSpeed) {
+      timerMode.stop();
+      timerMode.start();
+  }
 
   if (!state.pronunciationModeEnabled) {
     stopRecognition();
@@ -148,7 +161,9 @@ export function getDefaultSettings() {
     answerTipLetters: 0,
     restartOnWrongEnabled: false,
     evaluativeModeEnabled: false,
+    evaluativeModeEnabled: false,
     pronunciationModeEnabled: false,
+    timerModeEnabled: false,
     voiceIndex: "none",
   };
 }
@@ -160,7 +175,9 @@ export function applySettingsToModalUI(settings) {
   dom.colorHintToggle.checked = s.colorHintEnabled;
   dom.positionHintToggle.checked = s.positionHintEnabled;
   dom.restartOnWrongToggle.checked = s.restartOnWrongEnabled;
+  dom.restartOnWrongToggle.checked = s.restartOnWrongEnabled;
   dom.answerTipInput.value = s.answerTipLetters;
+  dom.gameSpeedInput.value = s.gameSpeed || 1;
 
   const voicesLoaded = dom.voiceSelect.options.length > 1;
   let pMode = s.pronunciationModeEnabled;
@@ -171,7 +188,8 @@ export function applySettingsToModalUI(settings) {
 
   dom.modeFsrsToggle.checked = s.evaluativeModeEnabled;
   dom.modePronunciationToggle.checked = pMode;
-  dom.modeFreeToggle.checked = !s.evaluativeModeEnabled && !pMode;
+  dom.modeTimerToggle.checked = s.timerModeEnabled;
+  dom.modeFreeToggle.checked = !s.evaluativeModeEnabled && !pMode && !s.timerModeEnabled;
 
   updateModeSettingsVisibility();
 
@@ -190,7 +208,7 @@ export function applySettingsToModalUI(settings) {
     }
 
     dom.modePronunciationToggle.checked = pModeDelayed;
-    dom.modeFreeToggle.checked = !s.evaluativeModeEnabled && !pModeDelayed;
+    dom.modeFreeToggle.checked = !s.evaluativeModeEnabled && !pModeDelayed && !s.timerModeEnabled;
 
     updateModeSettingsVisibility();
   }, 200);
@@ -205,6 +223,8 @@ function readSettingsFromUI() {
     restartOnWrongEnabled: dom.restartOnWrongToggle.checked,
     evaluativeModeEnabled: dom.modeFsrsToggle.checked,
     pronunciationModeEnabled: dom.modePronunciationToggle.checked,
+    timerModeEnabled: dom.modeTimerToggle.checked,
+    gameSpeed: parseInt(dom.gameSpeedInput.value, 10) || 1,
     voiceIndex: dom.voiceSelect.value,
   };
 }

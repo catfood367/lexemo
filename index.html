@@ -241,8 +241,26 @@
                 value="pronunciation"
               />
             </label>
+            <label>
+              <span data-i18n="SPEED_MODE">Speed Mode</span>
+              <input
+                type="checkbox"
+                id="modeTimerToggle"
+                name="gameMode"
+                value="timer"
+              />
+            </label>
           </div>
         </fieldset>
+
+        <label id="gameSpeedGroup" style="display: none;">
+          <span data-i18n="GAME_SPEED"></span>:
+          <span class="input-number-control">
+            <button class="btn-step" id="gameSpeedDecrement">-</button>
+            <input type="number" id="gameSpeedInput" min="1" max="10" value="1">
+            <button class="btn-step" id="gameSpeedIncrement">+</button>
+          </span>
+        </label>
 
         <div id="freeModeSettingsDiv">
           <label>
@@ -405,6 +423,17 @@
       <span id="scoreText"></span>
 
     </div>
+
+    <div id="game-area">
+      <div id="context-hint-box" class="context-hint-box" style="display: none;">
+        <span class="context-icon">💡</span>
+        <span id="context-hint-text"></span>
+      </div>
+      <!-- Syllable and translation will be injected here by JS -->
+    </div>
+
+    <div id="timer-mode-container" style="display: none;"></div>
+
 
     <div id="shortcutsPanel">
       <span class="shortcut-item">

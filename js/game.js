@@ -2,6 +2,7 @@ import { state, GROUP_SIZE, correctSound, wrongSound } from "./state.js";
 import * as utils from "./utils.js";
 import * as fsrs from "./fsrs.js";
 import * as speech from "./speech.js";
+import { timerMode } from "./timerMode.js";
 import {
   dom,
   showCongrats,
@@ -107,8 +108,10 @@ function _createTranslationElement() {
 
 function _applyFsrsStyles(syllableEl, translationEl) {
   syllableEl.style.color = "inherit";
+  syllableEl.style.textShadow = "0 0 5px rgba(255, 255, 255, 0.5)";
   syllableEl.textContent = state.currentSyllable.question;
   translationEl.style.color = "inherit";
+  translationEl.style.textShadow = "0 0 5px rgba(255, 255, 255, 0.5)";
   syllableEl.style.left = "50%";
   syllableEl.style.top = "50%";
   syllableEl.style.transform = "translate(-50%, -50%)";
@@ -135,7 +138,9 @@ function _applyFreeModeStyles(syllableEl, translationEl) {
       ? color
       : "inherit";
   syllableEl.style.color = hintColor;
+  syllableEl.style.textShadow = "0 0 5px rgba(255, 255, 255, 0.5)";
   translationEl.style.color = hintColor;
+  translationEl.style.textShadow = "0 0 5px rgba(255, 255, 255, 0.5)";
 
   _setSyllableText(syllableEl);
 
@@ -203,6 +208,11 @@ function _initializeDeckMode() {
   if (state.evaluativeModeEnabled) {
     state.cardStartTime = Date.now();
   } else {
+    // Reset to original order first
+    if (state.originalSyllableList) {
+      state.syllableList = [...state.originalSyllableList];
+    }
+    
     if (state.randomToggleEnabled) {
       state.syllableList = utils.shuffle([...state.syllableList]);
     }
@@ -218,6 +228,22 @@ export function startGame() {
       return;
     }
     return;
+  }
+
+  if (state.timerModeEnabled) {
+      // Reset to original order first
+      if (state.originalSyllableList) {
+        state.syllableList = [...state.originalSyllableList];
+      }
+      // Shuffle if random is enabled
+      if (state.randomToggleEnabled) {
+        state.syllableList = utils.shuffle([...state.syllableList]);
+      }
+      
+      timerMode.start();
+      return;
+  } else {
+      timerMode.stop();
   }
 
   speech.selectVoice();

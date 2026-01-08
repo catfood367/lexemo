@@ -72,6 +72,10 @@ export const dom = {
   modeFreeToggle: document.getElementById("modeFreeToggle"),
   modeFsrsToggle: document.getElementById("modeFsrsToggle"),
   modePronunciationToggle: document.getElementById("modePronunciationToggle"),
+  modeTimerToggle: document.getElementById("modeTimerToggle"),
+  gameSpeedInput: document.getElementById("gameSpeedInput"),
+  gameSpeedDecrement: document.getElementById("gameSpeedDecrement"),
+  gameSpeedIncrement: document.getElementById("gameSpeedIncrement"),
   settingsModalActions: document.getElementById("settingsModalActions"),
   settingsCancelBtn: document.getElementById("settingsCancelBtn"),
   settingsSaveBtn: document.getElementById("settingsSaveBtn"),
@@ -160,9 +164,35 @@ export function renderDeckModal() {
 }
 
 export function updateModeSettingsVisibility() {
-  dom.freeModeSettingsDiv.style.display = dom.modeFreeToggle.checked
-    ? "block"
-    : "none";
+  const isFree = dom.modeFreeToggle.checked;
+  const isTimer = dom.modeTimerToggle.checked;
+
+  dom.freeModeSettingsDiv.style.display = isFree || isTimer ? "block" : "none";
+  
+  const gameSpeedGroup = document.getElementById("gameSpeedGroup");
+  if (gameSpeedGroup) gameSpeedGroup.style.display = isTimer ? "flex" : "none";
+
+  // Helper to toggle visibility of a setting's parent label
+  const toggleSetting = (element, show) => {
+    const label = element.closest("label");
+    if (label) label.style.display = show ? "flex" : "none";
+  };
+
+  if (isTimer) {
+    // In Timer Mode, only show Random Order
+    toggleSetting(dom.answerTipInput, false);
+    toggleSetting(dom.colorHintToggle, false);
+    toggleSetting(dom.positionHintToggle, false);
+    toggleSetting(dom.restartOnWrongToggle, false);
+    toggleSetting(dom.randomToggle, true);
+  } else if (isFree) {
+    // In Free Mode, show all
+    toggleSetting(dom.answerTipInput, true);
+    toggleSetting(dom.colorHintToggle, true);
+    toggleSetting(dom.positionHintToggle, true);
+    toggleSetting(dom.restartOnWrongToggle, true);
+    toggleSetting(dom.randomToggle, true);
+  }
 }
 
 function _getFsrsScoreText(stats) {
@@ -206,6 +236,13 @@ export function updateScoreDisplay() {
 }
 
 export function updateShortcutsVisibility() {
+  if (state.timerModeEnabled) {
+    document.getElementById("shortcutsPanel").style.display = "none";
+    return;
+  } else {
+    document.getElementById("shortcutsPanel").style.display = "flex";
+  }
+
   const isFsrs = state.evaluativeModeEnabled;
   const display = isFsrs ? "none" : "flex";
   if (dom.levelRangeShortcut) dom.levelRangeShortcut.style.display = display;

@@ -82,5 +82,7 @@
     "DELETE_CARD": "Deletar Card",
     "LEVEL_RANGE": "Intervalo de Níveis",
     "LEVEL_RANGE_INSTRUCTION": "Segure <kbd>↑</kbd> e digite o intervalo (ex: 5 ou 5-10)",
-    "EXPORT_FILE": "Exportar Arquivo"
+    "EXPORT_FILE": "Exportar Arquivo",
+    "SPEED_MODE": "Modo Velocidade",
+    "GAME_SPEED": "Velocidade do Jogo"
 }

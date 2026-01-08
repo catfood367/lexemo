@@ -82,5 +82,7 @@
     "DELETE_CARD": "Eliminar Tarjeta",
     "LEVEL_RANGE": "Rango de Niveles",
     "LEVEL_RANGE_INSTRUCTION": "Mantén <kbd>↑</kbd> y escribe rango (ej. 5 o 1-5)",
-    "EXPORT_FILE": "Exportar Archivo"
+    "EXPORT_FILE": "Exportar Archivo",
+    "SPEED_MODE": "Modo Velocidad",
+    "GAME_SPEED": "Velocidad del Juego"
 }
